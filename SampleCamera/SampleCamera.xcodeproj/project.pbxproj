@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		948CC08523224DA8000D63E9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948CC08423224DA8000D63E9 /* MainViewController.swift */; };
+		948CC08723224F81000D63E9 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948CC08623224F81000D63E9 /* FilterListViewController.swift */; };
 		94EF966023208F3C006BB467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EF965F23208F3C006BB467 /* AppDelegate.swift */; };
 		94EF966223208F3C006BB467 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EF966123208F3C006BB467 /* ViewController.swift */; };
 		94EF966523208F3C006BB467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94EF966323208F3C006BB467 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		948CC08423224DA8000D63E9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		948CC08623224F81000D63E9 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
 		94EF965C23208F3C006BB467 /* SampleCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94EF965F23208F3C006BB467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94EF966123208F3C006BB467 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 			children = (
 				94EF965F23208F3C006BB467 /* AppDelegate.swift */,
 				94EF966123208F3C006BB467 /* ViewController.swift */,
+				948CC08423224DA8000D63E9 /* MainViewController.swift */,
+				948CC08623224F81000D63E9 /* FilterListViewController.swift */,
 				94EF966323208F3C006BB467 /* Main.storyboard */,
 				94EF966623208F3E006BB467 /* Assets.xcassets */,
 				94EF966823208F3E006BB467 /* LaunchScreen.storyboard */,
@@ -135,6 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948CC08723224F81000D63E9 /* FilterListViewController.swift in Sources */,
+				948CC08523224DA8000D63E9 /* MainViewController.swift in Sources */,
 				94EF966223208F3C006BB467 /* ViewController.swift in Sources */,
 				94EF966023208F3C006BB467 /* AppDelegate.swift in Sources */,
 			);
@@ -285,6 +293,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9V36UB856X;
 				INFOPLIST_FILE = SampleCamera/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -292,7 +301,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SampleCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -303,6 +312,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9V36UB856X;
 				INFOPLIST_FILE = SampleCamera/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +320,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SampleCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
