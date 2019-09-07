@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol FilterListViewcontrollerDelegate: class {
+protocol FilterListViewControllerDelegate: class {
     func filterListViewController(_ controller: FilterListViewController, didSelectFilter filter:String, index: Int)
 }
 
 
 class FilterListViewController: UITableViewController {
-
+    
     let filterList:[String] = ["", "CIPhotoEffectChrome", "CIPhotoEffectFade", "CIPhotoEffectInstant", "CIPhotoEffectMono", "CIPhotoEffectNoir", "CIPhotoEffectProcess", "CIPhotoEffectTonal", "CIPhotoEffectTransfer", "CISepiaTone", "CIVignette",]
     
-    weak var delegate: FilterListViewcontrollerDelegate? = nil
+    weak var delegate: FilterListViewControllerDelegate? = nil
     //デリゲート先を保存しておく変数
     var selectedIndex: Int = 0 //選択済みの番号を記録しておく変数
     
@@ -25,23 +25,23 @@ class FilterListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        
+        
     }
-
-
-//UITableViewのセクションの数を設定
+    
+    
+    //UITableViewのセクションの数を設定
     override func numberOfSections(in tableView: UITableView) -> Int {
         //セクションは一つ
         return 1
     }
-//セクション内のセル数の設定
+    //セクション内のセル数の設定
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //フィルターの配列に格納されている数（フィルター１０個）を表示する
         return filterList.count
     }
     
-//表示するUITableViewCellの設定
+    //表示するUITableViewCellの設定
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //表示するUITableViewCellは識別子「”Cell”」で設定
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -78,5 +78,5 @@ class FilterListViewController: UITableViewController {
         //前の画面に戻る
         self.navigationController?.popViewController(animated: true)
     }
-
+    
 }

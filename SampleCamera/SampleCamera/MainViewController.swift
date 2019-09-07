@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FilterListViewcontrollerDelegate {
+class MainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FilterListViewControllerDelegate {
     
     var selectedIndex: Int = 0//選択したフィルターの順番を保持しておく変数
     
@@ -44,16 +44,18 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     @IBAction func onEditBottunTapped(_ sender: Any) {
         self.performSegue(withIdentifier: "MoveFilterListView", sender: nil)
-
+        
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // 撮影、選択した写真が正しく取得できたかをチェック
         // UIImagePickerControllerOriginalImageで取得した写真を取り出せる
-        if let editedImage: UIImage = info[.originalImage] as! UIImage {
+        if let editedImage: UIImage = info[.originalImage] as? UIImage {
             // UIImageViewに画像をセット
             myImageView.image = editedImage
             // オリジナルデータをセット
             myImage = editedImage
+            
+            selectedIndex = 0
         }
         // 画像が正しく表示されるようであれば、注意書きを消す
         if myImageView.image != nil {
@@ -91,10 +93,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.present(picker, animated: true, completion: nil)
         }
     }
-    func filterListViewController(_ controller: FilterListViewController, didSelectFilter filter: String, index: Int) {
-        //選択したフィルターの順番を保持しておく
-        selectedIndex = index
-    }
     //storuboardで設定した遷移時に実装されるメソッド
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //念のために識別子のチェック
@@ -110,6 +108,50 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
     
-
-
+    //Mark: -FilterListViewControllerDelegte
+    func filterListViewController(_ controller: FilterListViewController, didSelectFilter filter: String, index: Int){
+        //選択したフィルターの順番を保持しておく
+        selectedIndex = index
+        
+        //フィルター加工しない場合はオリジナルを表示する
+        if filter.isEmpty{
+            //選択した番号は０を入れる
+            selectedIndex = 0
+            
+            //画像は保持しているオリジナル画像をセットする
+            myImageView.image = myImage
+            
+            return
+        }
+        
+        //フィルターを設定する
+        let filter: CIFilter = CIFilter(name: filter)!
+        
+        //画像をCIImageに変換
+        let ciImage: CIImage = CIImage(image: myImage!)!
+        
+        //CIImageにフィルターを適用
+        filter.setValue(ciImage, forKey: kCIInputImageKey)
+        
+        //フィルターを適用した画像を出力できるかチェック
+        if let filteredImage: CIImage = filter.outputImage{
+            
+            //コンテキストの準備
+            let context = CIContext(options: nil)
+            //CIImageの作成
+            let cgiImage = context.createCGImage(filteredImage, from: filteredImage.extent)
+            
+            //CGImageをUIImageへ変換
+            //写真の向きを調整
+            let image = UIImage(cgImage: cgiImage!, scale: UIScreen.main.scale, orientation: myImage.imageOrientation)
+            
+            myImageView.image = image
+        }
+        
+    }
+    
+    
+    
+    
+    
 }
