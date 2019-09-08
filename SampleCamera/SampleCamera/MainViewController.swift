@@ -41,8 +41,27 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     @IBAction func onSaveBottunTapped(_ sender: Any) {
+        
+        if myImageView.image == nil{
+            let controller: UIAlertController = UIAlertController(title: "", message: "写真が選択されていません。右上のボタンから写真を選択してください。", preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(controller, animated: true, completion: nil)
+            return
+        }
+        
+        //UIImageWriteToSavedPhotosAlbumで画像を端末に保存する
+        UIImageWriteToSavedPhotosAlbum(myImageView.image!, self, #selector(self.showResultSavedImage(_ :didFinishSavingWithError:contentInfo:)), nil)
     }
     @IBAction func onEditBottunTapped(_ sender: Any) {
+        
+        //画像が選択されていない時
+        if myImageView.image == nil{
+            let controller: UIAlertController = UIAlertController(title: "", message: "写真が選択されていません。右上のボタンから写真を選択してください。", preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(controller, animated: true, completion: nil)
+            return
+        }
+        
         self.performSegue(withIdentifier: "MoveFilterListView", sender: nil)
         
     }
@@ -148,6 +167,22 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             myImageView.image = image
         }
         
+    }
+    
+    @objc private func showResultSavedImage(_ image: UIImage, didFinishSavingWithError error: NSError!, contentInfo: UnsafeMutableRawPointer){
+        //表示する用のメッセージを用意
+        var title: String = "保存完了！"
+        var message: String = "カメラロールに画像を保存しました！"
+        
+        //保存が行えなかった場合にはエラーメッセージを表示
+        if error != nil {
+            title = "エラー"
+            message = "保存に失敗しました。設定アプリでプライバシー設定を確認してください"
+        }
+        
+        let controller: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(controller, animated: true, completion: nil)
     }
     
     
